@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     /// <summary>生命值圖片清單 </summary>
     [SerializeField] List<Image> LifeImage = new List<Image>();
     public int LifeCount = 3;
+    /// <summary>數量文字 </summary>
+    [SerializeField] Text t_Count;
+    [HideInInspector]public int Count;
     #region 單例
     private void Awake()
     {
@@ -37,6 +40,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-        Debug.Log(LifeCount);
+       
+    }
+    private void LateUpdate()
+    {
+        t_Count.text = Count.ToString();
     }
 }
