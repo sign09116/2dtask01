@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject GroundCheck;
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] Collider2D collider2;
+    string _LifeCount = "_LifeCount";
+
     private void Start()
     {
         collider2.enabled = true;
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
         {
             if (groundCheck.isGround)
             {
+                ani.SetTrigger("Jump");
                 P_rig.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse); 
             }  
         } 
@@ -52,9 +55,15 @@ public class Player : MonoBehaviour
     /// <summary>死亡 </summary>
     void Dead()
     {
+        if (ani.GetBool("DEAD")==true)
+        {
+            return;
+        }
+       
         ani.SetBool("DEAD", true);
+        P_rig.velocity = new Vector2(0f, P_rig.velocity.y);
+        StartCoroutine("StartGameOver");
         collider2.enabled = false;
-        GameManager.instance.LifeCount--;
     }
     #endregion
     private void OnCollisionEnter2D(Collision2D hit)
@@ -71,6 +80,14 @@ public class Player : MonoBehaviour
             GameManager.instance.Count++;
             Destroy(eat.gameObject);
         }
+    }
+    IEnumerator StartGameOver()
+    {
+        GameManager.instance.HPDown();
+        yield return new WaitForSeconds(1.5f);
+        GameManager.instance.GameOver_grp.alpha = 1;
+        GameManager.instance.GameOver_grp.blocksRaycasts = true;
+      
     }
 }
 

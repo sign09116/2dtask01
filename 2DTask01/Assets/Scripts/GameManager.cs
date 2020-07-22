@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     /// <summary>生命值圖片清單 </summary>
-    [SerializeField] List<Image> LifeImage = new List<Image>();
-    public int LifeCount = 3;
+    [SerializeField] Image[] LifeImage;
+    public int LifeCount ;
     /// <summary>數量文字 </summary>
     [SerializeField] Text t_Count;
     [HideInInspector]public int Count;
+    public CanvasGroup GameOver_grp;
+    string _LifeCount = "_LifeCount";
+
     #region 單例
     private void Awake()
     {
@@ -21,14 +25,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.DeleteKey("LifeCount");
-        if (PlayerPrefs.GetInt("LifeCount") == 0)
+        LifeCount = PlayerPrefs.GetInt("_LifeCount");
+        GameOver_grp.alpha = 0;
+        GameOver_grp.blocksRaycasts = false;
+        Debug.Log(PlayerPrefs.GetInt("_LifeCount"));
+       // PlayerPrefs.DeleteKey("LifeCount");
+        if (LifeCount < 1)
         {
-           PlayerPrefs.SetInt("LifeCount", 3);
-        }
-        else
-        {
-            LifeCount = PlayerPrefs.GetInt("LifeCount");
+            LifeCount = 3;
         }
         for (int i = 0; i < LifeCount; i++)
         {
@@ -37,13 +41,19 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-       
-    }
+   
     private void LateUpdate()
     {
         t_Count.text = Count.ToString();
+    }
+    public void Retry()
+    {
+        SceneManager.LoadScene("Game");
+
+    }
+    public void HPDown()
+    {
+        LifeCount--;
+        PlayerPrefs.SetInt("_LifeCount", LifeCount);
     }
 }

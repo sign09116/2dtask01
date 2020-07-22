@@ -17,4 +17,10 @@ public class Car : MonoBehaviour
     [SerializeField] float speed;
     /// <summary>是否有天窗 </summary>
     [SerializeField] bool window;
+    [SerializeField] SpriteRenderer spriteRenderer;
+
+    private void Start()
+    {
+        spriteRenderer.color = color;
+    }
 }
