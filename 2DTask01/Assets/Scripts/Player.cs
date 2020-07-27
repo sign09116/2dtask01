@@ -15,6 +15,15 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject GroundCheck;
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] Collider2D collider2;
+    
+    #region 音效區域
+    [Header("聲音區域")]
+    [SerializeField] AudioClip s_Jump;
+    [SerializeField] AudioClip s_Hit;
+    [SerializeField] AudioClip s_GameOver;
+    [SerializeField] AudioClip s_Coin;
+    [SerializeField] AudioSource aud;
+    #endregion
     string _LifeCount = "_LifeCount";
 
     private void Start()
@@ -30,6 +39,7 @@ public class Player : MonoBehaviour
         {
             if (groundCheck.isGround)
             {
+                aud.PlayOneShot(s_Jump);
                 ani.SetTrigger("Jump");
                 P_rig.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse); 
             }  
@@ -51,6 +61,16 @@ public class Player : MonoBehaviour
             P_rig.velocity = new Vector2(MoveSpeed, P_rig.velocity.y);
         }
     }
+    void RoLl()
+    {
+    }
+    void Jump()
+    {
+
+    }
+   
+   
+
     #region 死亡
     /// <summary>死亡 </summary>
     void Dead()
@@ -59,7 +79,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
-       
+        aud.PlayOneShot(s_GameOver);
         ani.SetBool("DEAD", true);
         P_rig.velocity = new Vector2(0f, P_rig.velocity.y);
         StartCoroutine("StartGameOver");
@@ -77,6 +97,7 @@ public class Player : MonoBehaviour
     {
         if (eat.CompareTag("Cherry"))
         {
+            aud.PlayOneShot(s_Coin);
             GameManager.instance.Count++;
             Destroy(eat.gameObject);
         }
