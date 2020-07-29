@@ -56,4 +56,9 @@ public class GameManager : MonoBehaviour
         LifeCount--;
         PlayerPrefs.SetInt("_LifeCount", LifeCount);
     }
+    public void HpUP()
+    {
+        LifeCount++;
+        PlayerPrefs.SetInt("_LifeCount", LifeCount);
+    }
 }

@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+       
         collider2.enabled = true;
     }
     private void Update()
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
         ani.SetFloat("velocity", P_rig.velocity.y);
         ani.SetBool("isGround", groundCheck.isGround);
         //跳躍
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             if (groundCheck.isGround)
             {
@@ -110,5 +111,6 @@ public class Player : MonoBehaviour
         GameManager.instance.GameOver_grp.blocksRaycasts = true;
       
     }
+    
 }
 
