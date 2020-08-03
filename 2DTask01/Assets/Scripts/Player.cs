@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     {
        
         collider2.enabled = true;
+        
     }
     private void Update()
     {   //獲取慣性
@@ -62,15 +63,15 @@ public class Player : MonoBehaviour
             P_rig.velocity = new Vector2(MoveSpeed, P_rig.velocity.y);
         }
     }
-    void RoLl()
+    /// <summary>翻滾 </summary>
+    void Roll()
     {
     }
+    /// <summary>跳躍 </summary>
     void Jump()
     {
 
     }
-   
-   
 
     #region 死亡
     /// <summary>死亡 </summary>
@@ -83,7 +84,7 @@ public class Player : MonoBehaviour
         aud.PlayOneShot(s_GameOver);
         ani.SetBool("DEAD", true);
         P_rig.velocity = new Vector2(0f, P_rig.velocity.y);
-        StartCoroutine("StartGameOver");
+        LevelMnanger.instance.StartCoroutine("StartGameOver");
         collider2.enabled = false;
     }
     #endregion
@@ -103,14 +104,6 @@ public class Player : MonoBehaviour
             Destroy(eat.gameObject);
         }
     }
-    IEnumerator StartGameOver()
-    {
-        GameManager.instance.HPDown();
-        yield return new WaitForSeconds(1.5f);
-        GameManager.instance.GameOver_grp.alpha = 1;
-        GameManager.instance.GameOver_grp.blocksRaycasts = true;
-      
-    }
-    
+   
 }
 

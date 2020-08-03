@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     /// <summary>數量文字 </summary>
     [SerializeField] Text t_Count;
     [HideInInspector]public int Count;
-    public CanvasGroup GameOver_grp;
+   
     string _LifeCount = "_LifeCount";
 
     #region 單例
@@ -26,8 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LifeCount = PlayerPrefs.GetInt("_LifeCount");
-        GameOver_grp.alpha = 0;
-        GameOver_grp.blocksRaycasts = false;
+        
         Debug.Log(PlayerPrefs.GetInt("_LifeCount"));
        // PlayerPrefs.DeleteKey("LifeCount");
         if (LifeCount < 1)
@@ -46,11 +45,7 @@ public class GameManager : MonoBehaviour
     {
         t_Count.text = Count.ToString();
     }
-    public void Retry()
-    {
-        SceneManager.LoadScene("Game");
-
-    }
+  
     public void HPDown()
     {
         LifeCount--;

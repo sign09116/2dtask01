@@ -227,7 +227,7 @@ MonoBehaviour:
   s_Hit: {fileID: 8300000, guid: 1c58c7f7749b57040b9ca8ab09f7d514, type: 3}
   s_GameOver: {fileID: 8300000, guid: 7e8fa89919521d84b8180dc811d7c545, type: 3}
   s_Coin: {fileID: 8300000, guid: 5ac6242608b593342802f2c42954d298, type: 3}
-  aud: {fileID: 0}
+  aud: {fileID: 1561776419954875793}
 --- !u!82 &1561776419954875793
 AudioSource:
   m_ObjectHideFlags: 0

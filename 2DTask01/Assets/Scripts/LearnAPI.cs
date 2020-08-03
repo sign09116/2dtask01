@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class LearnAPI : MonoBehaviour
 {
+    [SerializeField] Light Mylight;
+    [SerializeField] Camera Mycamera;
     //認識API靜態(static) 關鍵字成員
     //Random.value 隨機零到1的值
     public void Start()
     {//取得靜態屬性
-        print(Random.value);
-        print(Mathf.PI);
+        //print(Random.value);
+        //print(Mathf.PI);
+
+        Mylight.color = Color.blue;
+        Mycamera.orthographicSize = 5f;
     }
     private void Update()
     {
-        print("遊戲時間" + Time.time);
+        //print("遊戲時間" + Time.time);
     }
+
 }
